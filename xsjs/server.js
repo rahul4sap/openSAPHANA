@@ -24,6 +24,15 @@ try {
 	console.log("[WARN]", err.message);
 }
 
+
+// configure SQLCC Secondary HANA for direct SFLIGHT access
+try {
+	options.hana.sqlcc = xsenv.getServices({ "xsjs.sqlcc_config": "CROSS_SCHEMA_SFLIGHT_00"} );
+	console.log("Options are:" + options);
+} catch (err) {
+	console.log("[WARN]", err.message);
+}
+
 // start server
 xsjs(options).listen(port);
 
