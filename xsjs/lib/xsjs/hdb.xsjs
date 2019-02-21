@@ -2,6 +2,11 @@
 /*eslint-env node, es6 */
 "use strict";
 
+if(!$.session.hasAppPrivilege("Display")) {
+	$.response.setBody("Not Authorized");
+	$.response.contentType = "text/plain";
+	$.response.status = $.net.http.UNAUTHORIZED;
+} else {
 var conn = $.hdb.getConnection();
 var query =
 	`SELECT FROM OPENSAP_PURCHASEORDER_ITEMVIEW { 
@@ -13,3 +18,4 @@ var rs = conn.executeQuery(query);
 $.response.setBody(JSON.stringify(rs));
 $.response.contentType = "application/json";
 $.response.status = $.net.http.OK;
+}

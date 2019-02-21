@@ -1,6 +1,13 @@
 {
 	"welcomeFile": "index.html",
 	"authenticationMethod": "route",
+	"logout": {
+		"logoutPage": "/logout.html",
+		"logoutEndpoint": "/my/logout"
+	},
+	"websockets": {
+		"enabled": true
+	},
 	"routes": [{
 		"source": "/catalog/(.*)",
 		"destination": "srv_api",
@@ -10,20 +17,86 @@
 		"source": "/odata/v4/(.*)",
 		"destination": "srv_api",
 		"csrfProtection": true,
-		"authenticationType": "xsuaa"
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"PUT": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"DELETE": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Delete"
+			],
+			"default": "$XSAPPNAME.Display"
+		}
+
 	}, {
 		"source": "/node(.*)",
 		"destination": "srv_api",
 		"csrfProtection": true,
-		"authenticationType": "xsuaa"
-	},{
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"PUT": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"DELETE": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Delete"
+			],
+			"default": "$XSAPPNAME.Display"
+		}
+
+	}, {
 		"source": "(.*)(.xsjs)",
 		"destination": "xsjs_api",
 		"csrfProtection": true,
-		"authenticationType": "xsuaa"
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"PUT": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"DELETE": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Delete"
+			],
+			"default": "$XSAPPNAME.Display"
+		}
 	}, {
 		"source": "(.*)(.xsodata)",
 		"destination": "xsjs_api",
-		"authenticationType": "xsuaa"
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"PUT": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"DELETE": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Delete"
+			],
+			"default": "$XSAPPNAME.Display"
+		}
 	}]
 }
